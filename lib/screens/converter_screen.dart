@@ -2,13 +2,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:currency_converter/constants.dart';
 import 'package:get/get.dart';
-import 'package:currency_converter/controllers/currency_controller.dart';
+import 'package:currency_converter/controllers/converter_controller.dart';
 import 'package:currency_converter/widgets/prog_indicator.dart';
 
 class ConverterScreen extends StatefulWidget {
   ConverterScreen({Key? key}) : super(key: key);
 
-  final CurrencyController c = Get.put(CurrencyController());
+  final ConverterController c = Get.put(ConverterController());
 
   @override
   State<ConverterScreen> createState() => _ConverterScreenState();
@@ -88,11 +88,12 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextField(
+                        autocorrect: false,
                         controller: controller,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          labelText: "Format: 15 usd in rub",
+                          labelText: "Example Format: 15 usd in rub",
                           hintStyle: TextStyle(color: Colors.grey[800]),
                           labelStyle: const TextStyle(
                               fontWeight: FontWeight.normal,
@@ -147,7 +148,6 @@ class _ConverterScreenState extends State<ConverterScreen> {
                 }
                 if (cur1Found) {
                   if(cur2Found) {
-                    //TODO: Now Everything is Ready
                     widget.c.fetchCurrency(doubleValue, cur1, cur2);
                   } else {
                     _showMyDialog("2nd Currency not found!");

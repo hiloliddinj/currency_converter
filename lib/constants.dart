@@ -3,7 +3,7 @@ import 'dart:ui';
 const Color mainColor = Color(0xFF212936);
 const Color secondColor = Color(0xFF2849E5);
 const String myApiKey = "4501f560-424b-11ec-96dd-23862cb51fef";
-const List<String> currencyList = [
+List<String> currencyList = [
   //https://free.currconv.com/api/v7/currencies?apiKey=do-not-use-this-api-key-IIm7WFMYA5aKg87Px29QO
   "ALL",
   "XCD",

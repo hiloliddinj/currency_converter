@@ -31,7 +31,7 @@ class _AppNavBarState extends State<AppNavBar> {
   int _selectedIndex = 0;
   List<Widget> bottomNavBarScreenList = [
     ConverterScreen(),
-    const CurrencyScreen(),
+    CurrencyScreen(),
   ];
 
   @override
@@ -41,7 +41,7 @@ class _AppNavBarState extends State<AppNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 25,
         selectedItemColor: Colors.white,
-        backgroundColor: Colors.black.withOpacity(0.3),
+        backgroundColor: secondColor.withOpacity(0.5),
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.white38,
         elevation: 0,
