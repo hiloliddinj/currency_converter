@@ -46,8 +46,8 @@ class _AppNavBarState extends State<AppNavBar> {
         unselectedItemColor: Colors.white38,
         elevation: 0,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Converter'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Curency'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Converter'),
+          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Curency'),
         ],
         currentIndex: _selectedIndex,
         onTap: (index) {

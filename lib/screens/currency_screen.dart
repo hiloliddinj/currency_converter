@@ -75,7 +75,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                       return const ProgIndicator();
                     }
                     return Text(
-                      'Selected Currency: ${widget.c.baseCurrency}',
+                      'Base Currency: ${widget.c.baseCurrency}',
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
