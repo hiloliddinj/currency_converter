@@ -20,7 +20,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
   int index = 0;
 
-  static const double? currencyTextSize = 22;
+  static const double? currencyTextSize = 18;
 
   @override
   void initState() {
@@ -103,7 +103,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                       ),
                       const SizedBox(width: 20),
                       const Text(
-                        '1 EUR = ',
+                        '100 EUR = ',
                         style: TextStyle(
                           fontSize: currencyTextSize,
                           fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                       ),
                       const SizedBox(width: 20),
                       const Text(
-                        '1 USD = ',
+                        '100 USD = ',
                         style: TextStyle(
                           fontSize: currencyTextSize,
                           fontWeight: FontWeight.bold,
@@ -153,7 +153,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         return Text(
                           '${widget.c.convertedUsdStrValue} ${widget.c.baseCurrency}',
                           style: const TextStyle(
-                            fontSize: 25,
+                            fontSize: currencyTextSize,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -175,7 +175,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                       ),
                       const SizedBox(width: 20),
                       const Text(
-                        '1 RUB = ',
+                        '1000 RUB = ',
                         style: TextStyle(
                           fontSize: currencyTextSize,
                           fontWeight: FontWeight.bold,

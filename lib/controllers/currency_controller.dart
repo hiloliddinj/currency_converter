@@ -18,9 +18,13 @@ class CurrencyController extends GetxController {
       isCurrencyLoading(true);
       var valueList = await (Services.fetchCurrencyUsdEurData(baseCurrency));
 
-      final roundedEurStrValue = valueList[0].toStringAsFixed(2);
-      final roundedUsdStrValue = valueList[1].toStringAsFixed(2);
-      final roundedRubStrValue = valueList[2].toStringAsFixed(2);
+      final eur100 = valueList[0] * 100;
+      final usd100 = valueList[1] * 100;
+      final rub1000 = valueList[2] * 100;
+
+      final roundedEurStrValue = eur100.toStringAsFixed(2);
+      final roundedUsdStrValue = usd100.toStringAsFixed(2);
+      final roundedRubStrValue = rub1000.toStringAsFixed(2);
 
       convertedEurStrValue = RxString(roundedEurStrValue);
       convertedUsdStrValue = RxString(roundedUsdStrValue);
