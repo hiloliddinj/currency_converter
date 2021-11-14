@@ -23,31 +23,21 @@ class Services {
   }
 
   static Future fetchCurrencyUsdEurData(String baseCurrency) async {
-    //print('Base Currency: $baseCurrency');
-    var responseEur = await http.get(Uri.parse(
-        'https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=EUR'));
+
     var responseUsd = await http.get(Uri.parse(
         'https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=USD'));
-    var responseRub = await http.get(Uri.parse(
-        'https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=RUB'));
 
-    //print('Status Code Eur: ${responseEur.statusCode}');
-    //print('Status Code Usd: ${responseUsd.statusCode}');
-    //print('Status Code Usd: ${responseRub.statusCode}');
-    if (responseEur.statusCode == 200 &&
-        responseUsd.statusCode == 200 &&
-        responseRub.statusCode == 200) {
-      var jsonDataEur = jsonDecode(responseEur.body);
+    if (responseUsd.statusCode == 200) {
       var jsonDataUsd = jsonDecode(responseUsd.body);
-      var jsonDataRub = jsonDecode(responseRub.body);
 
-      double targetEurValue = jsonDataEur['data'][baseCurrency];
-      double targetUsdValue = jsonDataUsd['data'][baseCurrency];
-      double targetRubValue = jsonDataRub['data'][baseCurrency];
-      //print('Euro: $targetEurValue');
-      //print('Usd: $targetUsdValue');
-      //print('Rub: $targetRubValue');
-      return [targetEurValue, targetUsdValue, targetRubValue];
+      double usdToBase = jsonDataUsd['data'][baseCurrency];
+      double usdToEur = jsonDataUsd['data']['EUR'];
+      double usdToRub = jsonDataUsd['data']['RUB'];
+
+      double eurToBase = usdToBase / usdToEur;
+      double rubToBase = usdToBase / usdToRub;
+
+      return [eurToBase, usdToBase, rubToBase];
     } else {
       //print('Error in fetching Currencies');
       return null;
