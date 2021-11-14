@@ -24,7 +24,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondColor,
-        title: const Text('Конвертер валют'),
+        title: const Center(child: Text('Конвертер валют')),
       ),
       backgroundColor: mainColor,
       body: SafeArea(

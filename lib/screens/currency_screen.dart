@@ -48,7 +48,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondColor,
-        title: const Text('Курсы валют'),
+        title: const Center(child: Text('Курсы валют')),
       ),
       backgroundColor: mainColor,
       body: SafeArea(
