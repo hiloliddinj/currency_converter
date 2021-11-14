@@ -24,7 +24,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
   @override
   void initState() {
-    currencySortedList = sort(currencyList);
+    currencySortedList = sort(filteredCurrencyList);
     index = currencySortedList.indexOf('TJS');
     scrollController = FixedExtentScrollController(
       initialItem: index,
