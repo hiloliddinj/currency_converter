@@ -24,6 +24,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondColor,
+        title: const Text('Конвертер валют'),
       ),
       backgroundColor: mainColor,
       body: SafeArea(
@@ -33,19 +34,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
-                flex: 1,
-                child: SizedBox(
-                  width: 200,
-                  child: Text(
-                    "Currency Converter",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 100),
               Expanded(
                   flex: 1,
                   child: Center(
@@ -53,7 +42,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       children: [
                         const Center(
                           child: Text(
-                            "Converted Value:",
+                            "Результат:",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -93,7 +82,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          labelText: "Example Format: 15 usd in rub",
+                          labelText: "Пример формата: 15 usd in rub",
                           hintStyle: TextStyle(color: Colors.grey[800]),
                           labelStyle: const TextStyle(
                               fontWeight: FontWeight.normal,
@@ -110,7 +99,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: _handleConvertPressed,
-                        child: const Text("Convert"),
+                        child: const Text("Конвертировать"),
                         style: ElevatedButton.styleFrom(
                           primary: secondColor,
                         ),
@@ -150,28 +139,28 @@ class _ConverterScreenState extends State<ConverterScreen> {
                   if(cur2Found) {
                     widget.c.fetchCurrency(doubleValue, cur1, cur2);
                   } else {
-                    _showMyDialog("2nd Currency not found!");
+                    _showMyDialog("2-я валюта не найдена!");
                   }
                 } else {
-                  _showMyDialog("1st Currency not found!");
+                  _showMyDialog("1-я валюта не найдена!");
                 }
               } else {
-                _showMyDialog("2nd Currency must be 3 letter");
+                _showMyDialog("2-я валюта должна быть трехбуквенной");
               }
             } else {
-              _showMyDialog("1st Currency must be 3 letter");
+              _showMyDialog("1-я валюта должна быть трехбуквенной");
             }
           } else {
-            _showMyDialog("You need to write 'in' between currencies");
+            _showMyDialog("Между валютами нужно писать - in");
           }
         } on Exception catch (_) {
-          _showMyDialog("Wrong Number Format!");
+          _showMyDialog("Неправильный числовой формат!");
         }
       } else {
-        _showMyDialog("Wrong Format!");
+        _showMyDialog("Неправильный формат!");
       }
     } else {
-      _showMyDialog("Field can not be empty!");
+      _showMyDialog("Поле не может быть пустым!");
     }
   }
 
@@ -180,11 +169,11 @@ class _ConverterScreenState extends State<ConverterScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Error!'),
+          title: const Text('Ошибка!'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                const Text('Example Format: "15 usd in rub"'),
+                const Text('Пример формата: "15 usd in rub"'),
                 Text(
                   message,
                   style: const TextStyle(
@@ -198,7 +187,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('OK'),
+              child: const Text('Хорошо'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

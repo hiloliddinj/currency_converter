@@ -27,20 +27,27 @@ class Services {
         .get(Uri.parse('https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=EUR'));
     var responseUsd = await http
         .get(Uri.parse('https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=USD'));
+    var responseRub = await http
+        .get(Uri.parse('https://freecurrencyapi.net/api/v2/latest?apikey=$myApiKey&base_currency=RUB'));
 
     //print('Status Code Eur: ${responseEur.statusCode}');
     //print('Status Code Usd: ${responseUsd.statusCode}');
-    if (responseEur.statusCode == 200 && responseUsd.statusCode == 200) {
+    //print('Status Code Usd: ${responseRub.statusCode}');
+    if (responseEur.statusCode == 200 && responseUsd.statusCode == 200 && responseRub.statusCode == 200) {
       var jsonDataEur = jsonDecode(responseEur.body);
       var jsonDataUsd = jsonDecode(responseUsd.body);
+      var jsonDataRub = jsonDecode(responseRub.body);
 
       double targetEurValue = jsonDataEur['data'][baseCurrency];
       double targetUsdValue = jsonDataUsd['data'][baseCurrency];
+      double targetRubValue = jsonDataRub['data'][baseCurrency];
       //print('Euro: $targetEurValue');
       //print('Usd: $targetUsdValue');
+      //print('Rub: $targetRubValue');
       return [
         targetEurValue,
         targetUsdValue,
+        targetRubValue
       ];
     } else {
       print('Error in fetching Currencies');

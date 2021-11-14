@@ -20,10 +20,12 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
   int index = 0;
 
+  static const double? currencyTextSize = 22;
+
   @override
   void initState() {
     currencySortedList = sort(currencyList);
-    index = currencySortedList.indexOf('RUB');
+    index = currencySortedList.indexOf('TJS');
     scrollController = FixedExtentScrollController(
       initialItem: index,
     );
@@ -46,6 +48,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondColor,
+        title: const Text('Курсы валют'),
       ),
       backgroundColor: mainColor,
       body: SafeArea(
@@ -55,34 +58,37 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                width: 200,
-                child: Text(
-                  "Currency Rates",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
               const SizedBox(height: 50),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Obx(() {
-                    if (widget.c.isCurrencyLoading()) {
-                      return const ProgIndicator();
-                    }
-                    return Text(
-                      'Base Currency: ${widget.c.baseCurrency}',
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Базовая валюта: ',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    );
-                  }),
+                      Obx(() {
+                        if (widget.c.isCurrencyLoading()) {
+                          return const ProgIndicator();
+                        }
+                        return Text(
+                          '${widget.c.baseCurrency}',
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
                   const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -96,14 +102,22 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         ),
                       ),
                       const SizedBox(width: 20),
+                      const Text(
+                        '1 EUR = ',
+                        style: TextStyle(
+                          fontSize: currencyTextSize,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                       Obx(() {
                         if (widget.c.isCurrencyLoading()) {
                           return const ProgIndicator();
                         }
                         return Text(
-                          '1 USD = ${widget.c.convertedUsdStrValue} ${widget.c.baseCurrency}',
+                          '${widget.c.convertedEurStrValue} ${widget.c.baseCurrency}',
                           style: const TextStyle(
-                            fontSize: 25,
+                            fontSize: currencyTextSize,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -124,14 +138,58 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         ),
                       ),
                       const SizedBox(width: 20),
+                      const Text(
+                        '1 USD = ',
+                        style: TextStyle(
+                          fontSize: currencyTextSize,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                       Obx(() {
                         if (widget.c.isCurrencyLoading()) {
                           return const ProgIndicator();
                         }
                         return Text(
-                          '1 UER = ${widget.c.convertedEurStrValue} ${widget.c.baseCurrency}',
+                          '${widget.c.convertedUsdStrValue} ${widget.c.baseCurrency}',
                           style: const TextStyle(
                             fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(width: 40),
+                      const SizedBox(
+                        height: 40,
+                        width: 40,
+                        child: Image(
+                          image: AssetImage('assets/rub.png'),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      const Text(
+                        '1 RUB = ',
+                        style: TextStyle(
+                          fontSize: currencyTextSize,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Obx(() {
+                        if (widget.c.isCurrencyLoading()) {
+                          return const ProgIndicator();
+                        }
+                        return Text(
+                          '${widget.c.convertedRubStrValue} ${widget.c.baseCurrency}',
+                          style: const TextStyle(
+                            fontSize: currencyTextSize,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -149,19 +207,19 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         showCupertinoModalPopup(
                           context: context,
                           builder: (context) => CupertinoActionSheet(
-                            title: const Text('Select Base Currency:'),
+                            title: const Text('Выберите базовую валюту'),
                             actions: [buildPicker()],
                             cancelButton: CupertinoActionSheetAction(
-                              child: const Text('Cancel'),
+                              child: const Text('Отмена'),
                               onPressed: () => Navigator.pop(context),
                             ),
-
                           ),
                         );
                       },
-                      child: const Text("Change Base Currency"),
+                      child: const Text("Изменить базовую валюту"),
                       style: ElevatedButton.styleFrom(
                         primary: secondColor,
+                        textStyle: const TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
@@ -193,13 +251,13 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
           children: List.generate(currencySortedList.length, (index) {
             final isSelected = this.index == index;
             final currency = currencySortedList[index];
-            final color =
-            isSelected ? CupertinoColors.activeBlue : CupertinoColors.black;
+            // final color =
+            // isSelected ? CupertinoColors.activeBlue : CupertinoColors.black;
 
             return Center(
               child: Text(
                 currency,
-                style: TextStyle(fontSize: 32, color: color),
+                style: const TextStyle(fontSize: 30),
               ),
             );
           }),
