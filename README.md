@@ -4,13 +4,11 @@ Currency Converter Demo
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+App has 2 screens: 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Converter Screen:
+  Here you an write currencies in format of: 15 usd in rub and it will convert from any currency to any currency your value
+  Example 100 usd in rub   => Result: 7274.88 RUB
+  
+- Currency Screen:
+  Here you can add base currency and 100 USD, 100 EUR & 1000 RUB is calculated
