@@ -20,7 +20,7 @@ class CurrencyController extends GetxController {
 
       final eur100 = valueList[0] * 100;
       final usd100 = valueList[1] * 100;
-      final rub1000 = valueList[2] * 100;
+      final rub1000 = valueList[2] * 1000;
 
       final roundedEurStrValue = eur100.toStringAsFixed(2);
       final roundedUsdStrValue = usd100.toStringAsFixed(2);
